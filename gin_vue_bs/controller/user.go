@@ -111,6 +111,13 @@ func Login(ctx *gin.Context) {
 
 }
 
+//Info 用户信息.
+func Info(ctx *gin.Context) {
+	user, _ := ctx.Get("user")
+
+	ctx.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": user}})
+}
+
 //isTelephoneExist .
 func isTelephoneExist(db *gorm.DB, telephone string) bool {
 	var user model.User
