@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"log"
 	"net/http"
 
 	"gin_vue_bs/common"
@@ -93,7 +94,14 @@ func Login(ctx *gin.Context) {
 	}
 
 	//发放token
-	token := "66"
+	token, err := common.ReleaseToken(user)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError,
+			gin.H{"code": 500, "msg": "系统错误"})
+		log.Printf("token generate error :%s", err)
+		return
+	}
 
 	ctx.JSON(200, gin.H{
 		"msg":  "登录成功",
