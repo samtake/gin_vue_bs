@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"gin_vue_bs/common"
+	"gin_vue_bs/dto"
 	"gin_vue_bs/model"
 	"gin_vue_bs/util"
 
@@ -115,7 +116,7 @@ func Login(ctx *gin.Context) {
 func Info(ctx *gin.Context) {
 	user, _ := ctx.Get("user")
 
-	ctx.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": user}})
+	ctx.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": dto.ToUserDto(user.(model.User))}})
 }
 
 //isTelephoneExist .
